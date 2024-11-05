@@ -66,9 +66,8 @@ function login() {
         dataType: "html",
         data: {_token: TOKEN, func: 'auth', email: email, password: password}
     }).done(function(data){
-        console.log(data);
         if(data > 0) {
-            // location.reload();
+            location.reload();
         } else {
             let massages = data.split('|');
             $.each(massages, function (index, value) { 

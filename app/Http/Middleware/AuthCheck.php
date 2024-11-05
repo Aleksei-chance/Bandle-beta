@@ -16,7 +16,7 @@ class AuthCheck
     public function handle(Request $request, Closure $next): Response
     {
         if($request->path() == 'auth' && auth(guard: "web")->check()) {
-            return redirect('/MyBandles');
+            return redirect('/user/bandle');
         }
         else if ($request->path() != 'auth' && !auth(guard: "web")->check())
         {

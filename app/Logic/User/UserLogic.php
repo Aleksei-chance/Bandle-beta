@@ -66,4 +66,19 @@ class UserLogic {
         }
         return "email_login:|password_login:Wrong data";
     }
+
+    public static function get_bandles()
+    {
+        $user_id = Auth::id();
+        $bandle_limit = Auth::user()->bandle_limit;
+        $items = User::query()->find($user_id)->bandles()->get()->toArray();
+        $arr = array(
+            'id' => $user_id
+            , 'items' => $items
+            , 'add_avalable' => (count($items) < $bandle_limit)
+            , 'type_view' => 0
+        );
+
+        return $arr;
+    }
 }
