@@ -8,7 +8,7 @@
         <button class="nav_button nav_set" onclick="location.href='/settings'"></button>
     </div>
 </div>
-<div class="bandle_container" id="bandle_container">
+<div class="bandle_container" id="content">
 
 </div>
 <div class="toolbar">
@@ -28,7 +28,7 @@
 </div> --}}
 
 <script>
-    bandle_items_load({!! $type_view !!}, {{ $sort }});
+    user_page_load('{!! $type !!}');
 </script>
 
 @endsection

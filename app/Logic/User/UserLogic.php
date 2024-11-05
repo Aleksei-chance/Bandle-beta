@@ -81,4 +81,14 @@ class UserLogic {
 
         return $arr;
     }
+
+    public function page_load($type)
+    {
+        if($type == 'bandle')
+        {
+            return view('user.bandle.items', UserLogic::get_bandles());
+        }
+
+        return 0;
+    }
 }

@@ -13,13 +13,14 @@ class LogicUserController extends Controller
 
         $user = new UserUserLogic;
         
-        if($func == 'registration')
-        {
+        if($func == 'registration') {
             return $user->registration($request);
         }
-        else if ($func == 'auth')
-        {
+        else if ($func == 'auth') {
             return $user->auth($request);
+        }
+        else if ($func == 'page_load' && $request->has('type')) {
+            return $user->page_load($request->type);
         }
 
         return '400 - Bad Request';

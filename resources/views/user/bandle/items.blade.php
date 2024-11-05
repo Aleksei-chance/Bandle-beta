@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-
 <div class="bandle_list">
     @foreach ($items as $item)
     <div class="bandle_block "  style="cursor: pointer">
@@ -22,5 +18,3 @@
         </div>
     @endif
 </div>
-
-@endsection

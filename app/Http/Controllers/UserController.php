@@ -15,6 +15,5 @@ class UserController extends Controller
         }
 
         return abort(404);
-        // return view('user.bandle.items', UserLogic::get_bandles());
     }
 }
