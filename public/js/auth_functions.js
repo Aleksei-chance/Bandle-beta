@@ -36,7 +36,7 @@ function Registration_send() {
     let password_confirmation = $("#password_confirmation").val();
 
     $.ajax({
-        url: "api/user",
+        url: "/logic/user",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'registration', email: email, password: password, password_confirmation: password_confirmation}
@@ -61,13 +61,14 @@ function login() {
     let password = $("#login_password").val();
 
     $.ajax({
-        url: "api/user",
+        url: "/logic/user",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'auth', email: email, password: password}
     }).done(function(data){
+        console.log(data);
         if(data > 0) {
-            location.reload();
+            // location.reload();
         } else {
             let massages = data.split('|');
             $.each(massages, function (index, value) { 

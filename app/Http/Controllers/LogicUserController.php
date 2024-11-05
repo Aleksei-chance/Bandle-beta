@@ -6,7 +6,7 @@ use App\Logic\User\UserLogic as UserUserLogic;
 use Illuminate\Http\Request;
 use UserLogic;
 
-class ApiUserController extends Controller
+class LogicUserController extends Controller
 {
     public function connect(Request $request){
         $func = $request->func;

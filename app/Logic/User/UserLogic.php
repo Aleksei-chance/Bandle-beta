@@ -3,6 +3,7 @@
 namespace App\Logic\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserLogic {
@@ -60,7 +61,7 @@ class UserLogic {
 
         $data = $validator->validated();
 
-        if(auth(guard: "web")->attempt($data)) {
+        if(Auth::attempt($data)) {
             return 1;
         }
         return "email_login:|password_login:Wrong data";

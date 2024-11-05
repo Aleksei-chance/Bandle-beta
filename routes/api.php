@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ApiUserController;
+use App\Http\Controllers\LogicUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/user', [ApiUserController::class, 'connect']);
+Route::post('/user', [LogicUserController::class, 'connect']);
