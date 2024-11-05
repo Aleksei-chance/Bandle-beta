@@ -30,8 +30,8 @@ class User extends Authenticatable
         ];
     }
 
-    // public function bandles(): HasMany
-    // {
-    //     return $this->hasMany(Bandle::class, 'user_id')->where('publish', '1')->where('hidden', '0');
-    // }
+    public function bandles(): HasMany
+    {
+        return $this->hasMany(Bandle::class, 'user_id')->where('publish', '1')->where('hidden', '0');
+    }
 }

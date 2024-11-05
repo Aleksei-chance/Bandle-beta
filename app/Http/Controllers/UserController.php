@@ -7,7 +7,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function bandle(Request $request) {
-        return view('user.bandle.items', UserLogic::get_bandles());
+    public function view($type)
+    {
+        if($type == 'bandle')
+        {
+            return view('user.index', ['type' => $type]);
+        }
+
+        return abort(404);
+        // return view('user.bandle.items', UserLogic::get_bandles());
     }
 }

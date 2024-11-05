@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::get('/auth', [AuthController::class, 'view'])->middleware(AuthCheck::class);
-Route::get('/user/bandle', [UserController::class, 'bandle'])->middleware(AuthCheck::class);
+Route::get('/user/{type}', [UserController::class, 'view'])->middleware(AuthCheck::class);
 
 Route::post('/logic/user', [LogicUserController::class, 'connect']);
 
