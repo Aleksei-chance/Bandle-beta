@@ -37,4 +37,32 @@ class UserLogic {
 
         return 0;
     }
+
+    public function auth($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ["required", "email", "string"]
+            , "password" => ["required"]
+        ]);
+
+        if ($validator->fails()) 
+        {
+            $messages = $validator->errors()->messages();
+            $errors = array();
+            foreach($messages as $key => $massage) {
+                foreach($massage as $Item) {
+                    $errors[] = $key."_login:".$Item;
+                }
+            }
+
+            return implode("|", $errors);
+        }
+
+        $data = $validator->validated();
+
+        if(auth(guard: "web")->attempt($data)) {
+            return 1;
+        }
+        return "email_login:|password_login:Wrong data";
+    }
 }

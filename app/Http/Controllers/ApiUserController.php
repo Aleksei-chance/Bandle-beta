@@ -17,6 +17,10 @@ class ApiUserController extends Controller
         {
             return $user->registration($request);
         }
+        else if ($func == 'auth')
+        {
+            return $user->auth($request);
+        }
 
         return '400 - Bad Request';
     }

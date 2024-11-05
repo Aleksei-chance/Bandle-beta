@@ -51,7 +51,6 @@ function Registration_send() {
             });
             
         }
-        console.log(data);
     }).fail(function(){
         
     });
@@ -62,12 +61,11 @@ function login() {
     let password = $("#login_password").val();
 
     $.ajax({
-        url: "/login",
+        url: "api/user",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, email: email, password: password}
+        data: {_token: TOKEN, func: 'auth', email: email, password: password}
     }).done(function(data){
-        console.log(data);
         if(data > 0) {
             location.reload();
         } else {
