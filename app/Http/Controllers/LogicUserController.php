@@ -22,9 +22,6 @@ class LogicUserController extends Controller
         else if ($func == 'page_load' && $request->has('type')) {
             return $user->page_load($request->type);
         }
-        else if ($func == 'item_add_modal') {
-            return $user->item_add_modal();
-        }
 
         return '400 - Bad Request';
     }
