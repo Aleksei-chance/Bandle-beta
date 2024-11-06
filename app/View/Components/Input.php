@@ -15,6 +15,7 @@ class Input extends Component
         public string $id
         , public string $placeholder
         , public string $oninput
+        , public string $onchange
     )
     {}
 
