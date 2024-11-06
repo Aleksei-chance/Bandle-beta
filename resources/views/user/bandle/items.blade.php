@@ -8,7 +8,7 @@
     </div>
     @endforeach
     @if ($type_view == 0 && $add_avalable)
-        <div class="bandle_block bandle_add_hover" style="cursor: pointer" onclick="bandle_item_add();">
+        <div class="bandle_block bandle_add_hover" style="cursor: pointer" onclick="bandle_add_item();">
             <div class="bandle bandle_center">
                 <i class="bandle_add"></i>
             </div>

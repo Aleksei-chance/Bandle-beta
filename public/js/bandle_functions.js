@@ -48,3 +48,19 @@ function bandle_actions(type_view)
         clearTimeout(Timer);
     });
 }
+
+function bandle_add_item()
+{
+    $.ajax({
+        url: "/logic/user",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, Type: 'Bandle', func: 'item_add_modal'}
+    }).done(function(data)
+    {
+        $("#modal").html(data);
+    }).fail(function(data)
+    {
+        
+    });
+}
