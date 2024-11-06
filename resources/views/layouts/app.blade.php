@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('js/modal.js') }}"></script>
     <script src="{{ asset('js/bandle_functions.js') }}"></script>
 </head>
 <body class="body_main">
