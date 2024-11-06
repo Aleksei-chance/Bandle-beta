@@ -17,16 +17,6 @@
     <button class="my_bandle_btn my_active" onclick="location.href='/MyBandles'"></button>
 </div>
 
-{{-- <div class="hover_modal" id="bandle_items_sort_modal">
-    <div class="modal_sort_body list">
-        @foreach ($sort_types as $item)
-            <button class="list_item text_black" onclick="add_param_to_url('sort', {{ $item['id'] }})">
-                {{ $item['name'] }}
-            </button>
-        @endforeach
-    </div>
-</div> --}}
-
 <script>
     user_page_load('{!! $type !!}');
 </script>

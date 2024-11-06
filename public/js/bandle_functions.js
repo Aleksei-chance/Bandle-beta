@@ -49,10 +49,10 @@ function bandle_actions(type_view)
     });
 }
 
-function bandle_add_item()
+function bandle_item_add_modal()
 {
     $.ajax({
-        url: "/logic/user",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, Type: 'Bandle', func: 'item_add_modal'}
@@ -63,6 +63,21 @@ function bandle_add_item()
     {
         
     });
+}
+
+function input_valid(e) {
+    let val = $(e).val();
+    let block = $(e).parent().parent();
+    block.find(".error_text").hide().text("");
+    block.find("input").removeClass('input_error');
+    block.find("i").removeClass('icon_error');
+    if(val != "") {
+        block.find("i").removeClass('icon_send');
+        block.find("i").addClass('icon_clear');
+    } else {
+        block.find("i").addClass('icon_send');
+        block.find("i").removeClass('icon_clear');
+    }
 }
 
 
