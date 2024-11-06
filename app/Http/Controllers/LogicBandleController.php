@@ -11,8 +11,13 @@ class LogicBandleController extends Controller
     {
         $func = $request->func;
 
-        if ($func == 'item_add_modal') {
+        if ($func == 'item_add_modal') 
+        {
             return BandleLogic::item_add_modal();
+        }
+        else if ($func == 'item_add')
+        {
+            return BandleLogic::item_add($request);
         }
 
         return '400 - Bad Request';

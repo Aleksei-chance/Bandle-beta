@@ -15,5 +15,5 @@
 @endsection
 
 @section('button')
-<button class="modal_main_small" onclick="bandle_item_add_send()">Create</button>
+<button class="modal_main_small" onclick="bandle_item_add()">Create</button>
 @endsection

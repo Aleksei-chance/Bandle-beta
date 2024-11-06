@@ -65,22 +65,65 @@ function bandle_item_add_modal()
     });
 }
 
-function input_valid(e) {
+function input_valid(e) 
+{
     let val = $(e).val();
     let block = $(e).parent().parent();
     block.find(".error_text").hide().text("");
     block.find("input").removeClass('input_error');
     block.find("i").removeClass('icon_error');
-    if(val != "") {
+    if(val != "")
+    {
         block.find("i").removeClass('icon_send');
         block.find("i").addClass('icon_clear');
-    } else {
+    }
+    else
+    {
         block.find("i").addClass('icon_send');
         block.find("i").removeClass('icon_clear');
     }
 }
 
+function input_error(data) 
+{
+    let massages = data.split('|');
+    $.each(massages, function (index, value) 
+    { 
+        let massage = value.split(':');
+        let block = $("#"+massage[0]+'_block');
+        block.find("input").addClass('input_error');
+        if(block.find("input").val()) 
+        {
+            block.find("i").removeClass('icon_send').addClass('icon_error');
+        }
+        block.find(".error_text").show().text(massage[1]);
+    });
+}
 
+function bandle_item_add() 
+{
+    let title = $('#title').val();
+    let description = $('#description').val();
+    $.ajax({
+        url: "/logic/bandle",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_add', title: title, description: description}
+    }).done(function(data)
+    {
+        if(data > 0) 
+        {
+            user_page_load('bandle');
+            $('#bandle_item_add').modal('hide');
+        } 
+        else 
+        {
+            input_error(data);
+        }
+    }).fail(function(data){
+        
+    });
+}
 
 
 
