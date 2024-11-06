@@ -11,7 +11,9 @@
         <div class="modal_content">
             @yield('content')
         </div>
-        @yield('button')
+        <div class="modal_btn_group">
+            @yield('button')
+        </div>
     </div>
 </div>
 

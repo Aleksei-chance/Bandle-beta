@@ -42,4 +42,29 @@ class BandleLogic
         }
         return 0;
     }
+
+    public static function access($id)
+    {
+        $bandle = Bandle::query()->find($id);
+        
+        $user_id = Auth::id();
+        if($user_id == $bandle->user_id) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static function item_renew_modal($id)
+    {
+        $arr = array();
+        $bandle = Bandle::query()->find($id);
+    
+        if($bandle) 
+        {
+            return view('user.bandle.modals.item_renew', array_merge($bandle->toArray(), $arr) );
+        }
+        
+        return 0;
+    }
 }

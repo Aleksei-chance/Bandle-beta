@@ -31,7 +31,7 @@ function bandle_actions(type_view)
         {
             if(type_view == 0)
             {
-                bandle_renew_item(id);
+                bandle_item_renew_modal(id);
             }
             check = 0;
         }, 300);
@@ -120,6 +120,20 @@ function bandle_item_add()
         {
             input_error(data);
         }
+    }).fail(function(data){
+        
+    });
+}
+
+function bandle_item_renew_modal(id, Func = '') {
+    
+    $.ajax({
+        url: "/logic/bandle",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_renew_modal', id: id, Func: Func}
+    }).done(function(data){
+        $("#modal").html(data);
     }).fail(function(data){
         
     });

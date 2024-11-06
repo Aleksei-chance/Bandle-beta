@@ -10,6 +10,11 @@ class LogicBandleController extends Controller
     public function connect(Request $request)
     {
         $func = $request->func;
+        $id = 0;
+        if($request->has('id'))
+        {
+            $id = $request->id;
+        }
 
         if ($func == 'item_add_modal') 
         {
@@ -18,6 +23,14 @@ class LogicBandleController extends Controller
         else if ($func == 'item_add')
         {
             return BandleLogic::item_add($request);
+        }
+
+        if($id > 0 && BandleLogic::access($id))
+        {
+            if ($func == 'item_renew_modal')
+            {
+                return BandleLogic::item_renew_modal($id);
+            }
         }
 
         return '400 - Bad Request';
