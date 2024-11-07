@@ -31,6 +31,10 @@ class LogicBandleController extends Controller
             {
                 return BandleLogic::item_renew_modal($id);
             }
+            else if ($func == 'set_value_text' && $request->has('type') && $request->has('value'))
+            {
+                return BandleLogic::set_value_text($id, $request->type, $request->value);
+            }
         }
 
         return '400 - Bad Request';

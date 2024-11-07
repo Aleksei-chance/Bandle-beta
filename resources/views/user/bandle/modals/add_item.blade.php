@@ -5,8 +5,8 @@
 @section('title', 'New Bande')
 
 @section('content')
-<x-Input id="title" placeholder="Title" oninput="input_valid(this)" onchange=""/>
-<x-Input id="description" placeholder="Description" oninput="input_valid(this)" onchange=""/>
+<x-Input id="title" placeholder="Title" oninput="input_valid(this)"/>
+<x-Input id="description" placeholder="Description" oninput="input_valid(this)"/>
 @endsection
 
 @section('button')

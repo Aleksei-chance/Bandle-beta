@@ -57,14 +57,30 @@ class BandleLogic
 
     public static function item_renew_modal($id)
     {
-        $arr = array();
         $bandle = Bandle::query()->find($id);
+
+        $arr = array(
+            'id' => $id
+            , 'title' => $bandle->title
+            , 'description' => $bandle->description
+        );
     
         if($bandle) 
         {
-            return view('user.bandle.modals.item_renew', array_merge($bandle->toArray(), $arr) );
+            return view('user.bandle.modals.item_renew', $arr );
         }
         
+        return 0;
+    }
+
+    public static function set_value_text($id, $type, $value)
+    {
+        $bandle = Bandle::query()->find($id);
+        $bandle->$type = $value;
+        if($bandle->save())
+        {
+            return 1;
+        }
         return 0;
     }
 }

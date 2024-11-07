@@ -5,14 +5,8 @@
 @section('title', 'Bande edit')
 
 @section('content')
-<div class="input_block" id="title_block">
-    <input type="text" class="input_simple text_black" placeholder="Title" id="title"  oninput="input_valid(this)" value="{!! $title !!}">
-    <p class="error_text"></p>
-</div>
-<div class="input_block" id="description_block">
-    <input type="text" class="input_simple text_black" placeholder="Description" id="description"  oninput="input_valid(this)" value="{!! $description !!}">
-    <p class="error_text"></p>
-</div>
+<x-Value-Input id="title" placeholder="Title" onchange="bandle_set_value_text({{ $id }}, 'title', $(this).val())" value="{{ $title }}"/>
+<x-Value-Input id="description" placeholder="Description" onchange="bandle_set_value_text({{ $id }}, 'description', $(this).val())" value="{{ $description }}"/>
 @endsection
 
 @section('button')
