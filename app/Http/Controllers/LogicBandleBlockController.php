@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Logic\Bandle\BandleBlockLogic;
+use App\Logic\Bandle\BandleLogic;
+use Illuminate\Http\Request;
+
+class LogicBandleBlockController extends Controller
+{
+    public function connect(Request $request)
+    {
+        $func = $request->func;
+        $id = $bandle_id = 0;
+        if($request->has('id'))
+        {
+            $id = $request->id;
+        }
+        if($request->has('bandle_id'))
+        {
+            $bandle_id = $request->bandle_id;
+        }
+
+        if($bandle_id > 0 && BandleLogic::access($bandle_id))
+        {
+            if ($func == 'item_add_modal') 
+            {
+                return BandleBlockLogic::item_add_modal($bandle_id);
+            }
+        }
+
+        
+
+        return '400 - Bad Request';
+    }
+}
