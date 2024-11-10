@@ -226,4 +226,40 @@ function bandle_block_item_add(id, block_type_id) {
     });
 }
 
+function bandle_block_items_load(id, auth = false) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'items_load', bandle_id: id}
+    }).done(function(data){
+        $("#content").html(data);
+        // if(auth) {
+        //     bandle_block_actions();
+        // }
+    }).fail(function(data){
+        
+    });
+}
+
+function bandle_block_items_content_load() {
+    $(document).find('.block').each(function() {
+        let id = $(this).attr('id').replace('block_', '');
+        bandle_block_item_content_load(id);
+    });
+}
+
+function bandle_block_item_content_load(id) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_content_load', id: id}
+    }).done(function(data){
+        $("#block_"+id+"_content").html(data);
+    }).fail(function(data){
+        
+    });
+}
+
 

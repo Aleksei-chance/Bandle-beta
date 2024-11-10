@@ -21,7 +21,16 @@ class LogicBandleBlockController extends Controller
             $bandle_id = $request->bandle_id;
         }
 
-        if($bandle_id > 0 && BandleLogic::access($bandle_id))
+        if ($func == 'items_load' && $request->has('bandle_id')) 
+        {
+            return BandleBlockLogic::items_load($bandle_id);
+        }
+        else if($func == 'item_content_load' && $request->has('id'))
+        {
+            return BandleBlockLogic::item_content_load($id);
+        }
+
+        else if($bandle_id > 0 && BandleLogic::access($bandle_id))
         {
             if ($func == 'item_add_modal') 
             {
@@ -30,6 +39,14 @@ class LogicBandleBlockController extends Controller
             else if ($func == 'item_add' && $request->has('block_type_id'))
             {
                 return BandleBlockLogic::item_add($bandle_id, $request->block_type_id);
+            }
+        }
+
+        else if($id > 0 && BandleBlockLogic::access($id))
+        {
+            if ($func == 'item_content_load') 
+            {
+                return BandleBlockLogic::item_content_load($id);
             }
         }
 

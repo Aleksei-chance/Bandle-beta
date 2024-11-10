@@ -15,12 +15,16 @@
             <button class="btn_bandle_edit" onclick="bandle_renew_item({{ $id }}, 'location')"></button>
         </div>
     </div>
-    <div class="bandle_item_content" id="bandle_item_content">
+    <div class="bandle_item_content" id="content">
         
     </div>
     <div class="modal_header" style="justify-content: center;" id="bandle_action_btn">
         @include('bandle.buttons')
     </div>
 </div>
+
+<script>
+    bandle_block_items_load({{ $id }})
+</script>
 
 @endsection

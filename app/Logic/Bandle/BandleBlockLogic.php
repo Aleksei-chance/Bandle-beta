@@ -54,4 +54,43 @@ class BandleBlockLogic
         }
         return 0;
     }
+
+    public static function items_load($id)
+    {
+        $arr = array(
+            'id' => $id
+            , 'auth' => (Auth::check() && BandleLogic::access($id))
+            , 'items' => Bandle::query()->find($id)->blocks()->get()->toArray()
+        );
+
+        return view('bandle.block.items', $arr);
+    }
+
+    public static function access($id) {
+        $block = Block::query()->find($id);
+        
+        $user_id = Auth::id();
+        if($user_id == $block->user_id) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function item_content_load($id)
+    {
+        $block = Block::query()->find($id);
+        $bandle_id = $block->bandle_id;
+        $BandleLogic = New BandleLogic;
+        $BandleLogic = New BandleLogic($bandle_id, null);
+        $auth = (Auth::check() && BandleLogic::access($bandle_id));
+
+        $block_type_id = $block->block_type_id;
+        $icon = BlockType::query()->find($block_type_id)->icon;
+        $arr = array();
+        if($block_type_id == 1) {
+            $arr['auth'] = $auth;
+            $content = $block->name_content()->toArray();
+            return view('bandle.block.name_block', array_merge($arr, $content));
+        }
+    }
 }
