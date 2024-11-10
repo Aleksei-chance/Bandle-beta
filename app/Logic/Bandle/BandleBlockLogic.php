@@ -5,6 +5,7 @@ namespace App\Logic\Bandle;
 use App\Models\Bandle;
 use App\Models\Block;
 use App\Models\BlockType;
+use App\Models\ContactType;
 use App\Models\NameBlock;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,6 +104,31 @@ class BandleBlockLogic
             );
 
             return view('bandle.block.social_block', $arr);
+        } 
+        else if ($block_type_id == 3) 
+        {
+            $contacts = $block->contacts()->get();
+            $items = array();
+            foreach($contacts as $item) 
+            {
+                $icon = ContactType::query()->find($item->contact_type_id)->icon;
+                $items[] = array(
+                    'id' => $item->id
+                    , 'icon' => $icon
+                    , 'type' => $item->contact_type_id
+                    , 'value' => $item->value
+                );
+            }
+
+            $arr = array(
+                'id' => $id
+                , 'icon' => $icon
+                , 'items' => $items
+                , 'auth' => $auth
+            );
+
+            return view('bandle.block.contact_block', $arr);
         }
+        return 0;
     }
 }

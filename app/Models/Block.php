@@ -22,5 +22,13 @@ class Block extends Model
         return $this->hasMany(SocialLink::class, 'block_id')->where('publish', '1')->where('hidden', '0')->count();
     }
 
+    public function contacts() {
+        return $this->hasMany(Contact::class, 'block_id')->where('publish', '1')->where('hidden', '0');
+    }
+
+    public function contacts_count() {
+        return $this->hasMany(Contact::class, 'block_id')->where('publish', '1')->where('hidden', '0')->count();
+    }
+
     
 }
