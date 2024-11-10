@@ -19,7 +19,7 @@
         
     </div>
     <div class="modal_header" style="justify-content: center;" id="bandle_action_btn">
-        {{-- @include('user.bandle.components.item_action_btn') --}}
+        @include('bandle.buttons')
     </div>
 </div>
 

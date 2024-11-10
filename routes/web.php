@@ -4,6 +4,7 @@ use App\Http\Controllers\LogicUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BandleController;
 use App\Http\Controllers\LogicBandleController;
+use App\Http\Controllers\LogicBlockController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthCheck;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ Route::get('/user/{type}', [UserController::class, 'view'])->middleware(AuthChec
 
 Route::post('/logic/user', [LogicUserController::class, 'connect']);
 Route::post('/logic/bandle', [LogicBandleController::class, 'connect']);
+Route::post('/logic/block', [LogicBlockController::class, 'connect']);
 
 
 Route::get('/bandle/{bandle}', [BandleController::class, 'view']);
