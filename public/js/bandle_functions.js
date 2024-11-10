@@ -431,7 +431,7 @@ function bandle_block_actions()
         clearTimeout(oneSecondTimer);
 
         if(!moveX && !moveY && func_hold) {
-            bandle_block_renew_item(id_active);
+            bandle_block_item_renew_modal(id_active);
         } else if(moveX && !moveY) {
             let remove_width = $('#block_remove_'+id_active).css('width').replace('px', '');
             if(remove_width > 59) {
@@ -501,6 +501,35 @@ function bandle_block_item_remove(id, bandle_id) {
         if(data > 0) {
             $('#bandle_block_item_remove').modal('hide');
             bandle_block_items_load(bandle_id, 1);
+        }
+    }).fail(function(data){
+        
+    });
+}
+
+function bandle_block_item_renew_modal(id) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_renew_modal', id: id}
+    }).done(function(data){
+        $("#modal").html(data);
+    }).fail(function(data){
+        
+    });
+}
+
+function bandle_block_set_value_text(id, type, value, block_type_id)
+{
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'set_value_text', id: id, type: type, value: value, block_type_id: block_type_id}
+    }).done(function(data){
+        if(data > 0){
+            bandle_block_item_content_load(id);
         }
     }).fail(function(data){
         

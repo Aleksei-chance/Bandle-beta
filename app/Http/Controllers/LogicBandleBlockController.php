@@ -52,6 +52,14 @@ class LogicBandleBlockController extends Controller
             {
                 return BandleBlockLogic::item_remove($id);
             }
+            else if ($func == 'item_renew_modal') 
+            {
+                return BandleBlockLogic::item_renew_modal($id);
+            }
+            else if ($func == 'set_value_text' && $request->has('type') && $request->has('value') && $request->has('block_type_id')) 
+            {
+                return BandleBlockLogic::set_value_text($id, $request->type, $request->value, $request->block_type_id);
+            }
         }
 
         

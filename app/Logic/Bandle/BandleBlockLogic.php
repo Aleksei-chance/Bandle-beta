@@ -174,4 +174,61 @@ class BandleBlockLogic
         }
         return 0;
     }
+
+    public static function item_renew_modal($id)
+    {
+        $block_type_id = Block::query()->find($id)->block_type_id;
+        $block_type = BlockType::query()->find($block_type_id);
+        if($block_type_id == 1) {
+            $content = Block::query()->find($id)->name_content()->toArray();
+            $content['block_id'] = $id;
+            return view('bandle.block.modals.name_block_renew', $content);
+        } else if ($block_type_id == 2) {
+            $content = array(
+                'block_id' => $id
+                , 'icon' => $block_type->icon
+                , 'name' => $block_type->name
+                , 'items' => Block::query()->find($id)->social_links()->get()->toArray()
+            );
+            return view('user.bandle.block.modal.social_block_renew', $content);
+        } else if($block_type_id == 3) {
+            
+            $contact_types = ContactType::get();
+            $contact_items = array();
+            foreach($contact_types as $item) {
+                $contact_items[$item->id] = array(
+                    'id' => $item->id
+                    , 'icon' => $item->icon
+                    , 'name' => $item->name
+                );
+            }
+            
+            $content = array(
+                'block_id' => $id
+                , 'icon' => $block_type->icon
+                , 'name' => $block_type->name
+                , 'contact_types' => json_encode($contact_items)
+                , 'items' => Block::query()->find($id)->contacts()->get()->toArray()
+            );
+            return view('user.bandle.block.modal.contact_block_renew', $content);
+        }
+        return 0;
+    }
+
+    public static function set_value_text($id, $type, $value, $block_type_id){
+        if($block_type_id == 1)
+        {
+            return BandleNameBlockLogic::set_value_text($id, $type, $value);
+        }
+
+        return 0;
+    }
+}
+
+class BandleNameBlockLogic
+{
+    public static function set_value_text($id, $type, $value)
+    {
+        
+    }
 }
