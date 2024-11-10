@@ -14,5 +14,13 @@ class Block extends Model
         return $this->hasOne(NameBlock::class, 'block_id')->where('publish', '1')->where('hidden', '0')->first();
     }
 
+    public function social_links() {
+        return $this->hasMany(SocialLink::class, 'block_id')->where('publish', '1')->where('hidden', '0');
+    }
+
+    public function social_links_count() {
+        return $this->hasMany(SocialLink::class, 'block_id')->where('publish', '1')->where('hidden', '0')->count();
+    }
+
     
 }

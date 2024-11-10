@@ -87,10 +87,22 @@ class BandleBlockLogic
         $block_type_id = $block->block_type_id;
         $icon = BlockType::query()->find($block_type_id)->icon;
         $arr = array();
-        if($block_type_id == 1) {
+        if($block_type_id == 1) 
+        {
             $arr['auth'] = $auth;
             $content = $block->name_content()->toArray();
             return view('bandle.block.name_block', array_merge($arr, $content));
+        }
+        else if($block_type_id == 2) 
+        {
+            $arr = array(
+                'id' => $id
+                , 'icon' => $icon
+                , 'items' => $block->social_links()->get()->toArray()
+                , 'auth' => $auth
+            );
+
+            return view('bandle.block.social_block', $arr);
         }
     }
 }
