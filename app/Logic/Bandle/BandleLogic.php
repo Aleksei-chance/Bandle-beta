@@ -84,7 +84,7 @@ class BandleLogic
         return 0;
     }
 
-    public static function item_remove($id)
+    public static function item_remove_modal($id)
     {
         $arr = array(
             'id' => $id

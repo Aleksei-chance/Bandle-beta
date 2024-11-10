@@ -159,16 +159,38 @@ function bandle_set_value_text(id, type, value = '')
     });
 }
 
-function bandle_item_remove(id, Func = '') {
+function bandle_item_remov_modal(id, Func = '') {
     $.ajax({
         url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_remove', id: id, Func: Func}
+        data: {_token: TOKEN, func: 'item_remove_modal', id: id, Func: Func}
     }).done(function(data){
         $("#modal_g").html(data);
     }).fail(function(data){
         location.reload();
+    });
+}
+
+function bandle_remove_item_send(id, Func = '') {
+    $.ajax({
+        url: "/api",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, Type: 'Bandle', func: 'remove_item_send', id: id}
+    }).done(function(data){
+        if(data > 0) {
+            $('#bandle_item_remove').modal('hide');
+            $('#bandle_item_renew').modal('hide');
+            if(Func == "location") {
+                location.reload();
+            } else {
+                bandle_items_load(0);
+            }
+            
+        }
+    }).fail(function(data){
+        
     });
 }
 

@@ -35,9 +35,9 @@ class LogicBandleController extends Controller
             {
                 return BandleLogic::set_value_text($id, $request->type, $request->value);
             }
-            else if ($func == 'item_remove')
+            else if ($func == 'item_remove_modal')
             {
-                return BandleLogic::item_remove($id);
+                return BandleLogic::item_remove_modal($id);
             }
         }
 
