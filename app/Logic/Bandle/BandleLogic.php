@@ -91,4 +91,14 @@ class BandleLogic
         );
         return view('user.bandle.modals.item_remove', $arr);
     }
+
+    public static function item_remove($id)
+    {
+        $bandle = Bandle::query()->find($id);
+        $bandle->hidden = 1;
+        if($bandle->save()) {
+            return 1;
+        }
+        return 0;
+    }
 }

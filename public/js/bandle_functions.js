@@ -159,7 +159,7 @@ function bandle_set_value_text(id, type, value = '')
     });
 }
 
-function bandle_item_remov_modal(id, Func = '') {
+function bandle_item_remove_modal(id, Func = '') {
     $.ajax({
         url: "/logic/bandle",
         method: "post",
@@ -172,12 +172,12 @@ function bandle_item_remov_modal(id, Func = '') {
     });
 }
 
-function bandle_remove_item_send(id, Func = '') {
+function bandle_item_remove(id, Func = '') {
     $.ajax({
-        url: "/api",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, Type: 'Bandle', func: 'remove_item_send', id: id}
+        data: {_token: TOKEN, func: 'item_remove', id: id}
     }).done(function(data){
         if(data > 0) {
             $('#bandle_item_remove').modal('hide');
@@ -185,7 +185,7 @@ function bandle_remove_item_send(id, Func = '') {
             if(Func == "location") {
                 location.reload();
             } else {
-                bandle_items_load(0);
+                user_page_load('bandle');
             }
             
         }

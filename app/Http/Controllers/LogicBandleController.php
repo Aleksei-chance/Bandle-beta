@@ -39,6 +39,10 @@ class LogicBandleController extends Controller
             {
                 return BandleLogic::item_remove_modal($id);
             }
+            else if ($func == 'item_remove')
+            {
+                return BandleLogic::item_remove($id);
+            }
         }
 
         return '400 - Bad Request';

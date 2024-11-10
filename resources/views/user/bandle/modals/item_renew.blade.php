@@ -10,6 +10,6 @@
 @endsection
 
 @section('button')
-<button class="modal_btn_remove" onclick="bandle_item_remove({!! $id !!})">􀈑 Delete</button>
+<button class="modal_btn_remove" onclick="bandle_item_remove_modal({!! $id !!})">􀈑 Delete</button>
 <button class="modal_main_small" action="modal:hide" style="width: 108px;">Done</button>
 @endsection
