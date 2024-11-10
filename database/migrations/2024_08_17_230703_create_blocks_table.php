@@ -17,6 +17,8 @@ return new class extends Migration
 
             $table->foreignId('bandle_id')->constrained('bandles');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('block_type_id')->constrained('block_types');
+            $table->integer('sort')->default(0);
 
             $table->boolean('publish')->default(true);
             $table->boolean('hidden')->default(false);
