@@ -101,4 +101,13 @@ class BandleLogic
         }
         return 0;
     }
+
+    public static function get_item($id)
+    {
+        $bandle = Bandle::query()->find($id);
+        return array(
+            'id' => $bandle->id
+            , 'title' => $bandle->title
+        );
+    }
 }
