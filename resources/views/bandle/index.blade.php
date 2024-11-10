@@ -24,7 +24,7 @@
 </div>
 
 <script>
-    bandle_block_items_load({{ $id }})
+    bandle_block_items_load({{ $id }}, {{ $auth }})
 </script>
 
 @endsection

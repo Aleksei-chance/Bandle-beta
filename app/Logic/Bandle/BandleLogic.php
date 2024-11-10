@@ -108,6 +108,7 @@ class BandleLogic
         return array(
             'id' => $bandle->id
             , 'title' => $bandle->title
+            , 'auth' => (Auth::check() && BandleLogic::access($id))
         );
     }
 }
