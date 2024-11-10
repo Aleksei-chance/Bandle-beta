@@ -125,15 +125,18 @@ function bandle_item_add()
     });
 }
 
-function bandle_item_renew_modal(id, Func = '') {
+function bandle_item_renew_modal(id, Func = '') 
+{
     $.ajax({
         url: "/logic/bandle",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_renew_modal', id: id, Func: Func}
-    }).done(function(data){
+    }).done(function(data)
+    {
         $("#modal").html(data);
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
@@ -145,7 +148,8 @@ function bandle_set_value_text(id, type, value = '')
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'set_value_text', id: id, type: type, value: value}
-    }).done(function(data){
+    }).done(function(data)
+    {
         if(data > 0)
         {
             user_page_load('bandle');
@@ -154,115 +158,140 @@ function bandle_set_value_text(id, type, value = '')
         {
             alert(data);
         }
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_item_remove_modal(id, Func = '') {
+function bandle_item_remove_modal(id, Func = '') 
+{
     $.ajax({
         url: "/logic/bandle",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_remove_modal', id: id, Func: Func}
-    }).done(function(data){
+    }).done(function(data)
+    {
         $("#modal_g").html(data);
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         location.reload();
     });
 }
 
-function bandle_item_remove(id, Func = '') {
+function bandle_item_remove(id, Func = '') 
+{
     $.ajax({
         url: "/logic/bandle",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_remove', id: id}
-    }).done(function(data){
-        if(data > 0) {
+    }).done(function(data)
+    {
+        if(data > 0) 
+        {
             $('#bandle_item_remove').modal('hide');
             $('#bandle_item_renew').modal('hide');
-            if(Func == "location") {
+            if(Func == "location") 
+            {
                 location.reload();
-            } else {
+            } else 
+            {
                 user_page_load('bandle');
             }
             
         }
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_block_item_add_modal(id) {
+function bandle_block_item_add_modal(id) 
+{
     $.ajax({
         url: "/logic/block",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_add_modal', bandle_id: id}
-    }).done(function(data){
+    }).done(function(data)
+    {
         $("#modal").html(data);
         $('#modal').addClass('modal_block_add')
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_block_item_add(id, block_type_id) {
+function bandle_block_item_add(id, block_type_id) 
+{
     $.ajax({
         url: "/logic/block",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_add', bandle_id: id, block_type_id: block_type_id}
-    }).done(function(data){
+    }).done(function(data)
+    {
         if(data > 0)
         {
             bandle_block_items_load(id, 1);
             $('#bandle_block_item_add').modal('hide');
         }
         console.log(data);
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_block_items_load(id, auth = false) {
+function bandle_block_items_load(id, auth = false) 
+{
     $.ajax({
         url: "/logic/block",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'items_load', bandle_id: id}
-    }).done(function(data){
+    }).done(function(data)
+    {
         $("#content").html(data);
-        if(auth) {
+        if(auth) 
+        {
             bandle_block_actions();
         }
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_block_items_content_load() {
+function bandle_block_items_content_load() 
+{
     $(document).find('.block').each(function() {
         let id = $(this).attr('id').replace('block_', '');
         bandle_block_item_content_load(id);
     });
 }
 
-function bandle_block_item_content_load(id) {
+function bandle_block_item_content_load(id) 
+{
     $.ajax({
         url: "/logic/block",
         method: "post",
         dataType: "html",
         data: {_token: TOKEN, func: 'item_content_load', id: id}
-    }).done(function(data){
+    }).done(function(data)
+    {
         $("#block_"+id+"_content").html(data);
-    }).fail(function(data){
+    }).fail(function(data)
+    {
         
     });
 }
 
-function bandle_block_actions() {
+function bandle_block_actions() 
+{
     let func = "";
     let func_hold = false;
     let moveX = false;
@@ -447,6 +476,19 @@ function bandle_block_actions() {
             $('#block_remove_'+id).parent().css('gap', 8);
         }
     }
+}
+
+function bandle_block_item_remove_modal(id) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_remove_modal', id: id}
+    }).done(function(data){
+        $("#modal").html(data);
+    }).fail(function(data){
+        
+    });
 }
 
 

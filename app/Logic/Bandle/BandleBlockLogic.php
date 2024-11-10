@@ -131,4 +131,13 @@ class BandleBlockLogic
         }
         return 0;
     }
+
+    public static function item_remove_modal($id)
+    {
+        $arr = array(
+            'id' => $id
+            , 'bandle_id' => Block::query()->find($id)->bandle_id
+        );
+        return view('bandle.block.modals.item_remove', $arr);
+    }
 }

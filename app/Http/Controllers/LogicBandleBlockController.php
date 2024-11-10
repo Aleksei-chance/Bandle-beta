@@ -44,9 +44,9 @@ class LogicBandleBlockController extends Controller
 
         else if($id > 0 && BandleBlockLogic::access($id))
         {
-            if ($func == 'item_content_load') 
+            if ($func == 'item_remove_modal') 
             {
-                return BandleBlockLogic::item_content_load($id);
+                return BandleBlockLogic::item_remove_modal($id);
             }
         }
 
