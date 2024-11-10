@@ -491,4 +491,20 @@ function bandle_block_item_remove_modal(id) {
     });
 }
 
+function bandle_block_item_remove(id, bandle_id) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_remove', id: id}
+    }).done(function(data){
+        if(data > 0) {
+            $('#bandle_block_item_remove').modal('hide');
+            bandle_block_items_load(bandle_id, 1);
+        }
+    }).fail(function(data){
+        
+    });
+}
+
 

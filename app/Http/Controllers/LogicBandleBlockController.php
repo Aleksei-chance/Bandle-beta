@@ -48,6 +48,10 @@ class LogicBandleBlockController extends Controller
             {
                 return BandleBlockLogic::item_remove_modal($id);
             }
+            else if ($func == 'item_remove') 
+            {
+                return BandleBlockLogic::item_remove($id);
+            }
         }
 
         

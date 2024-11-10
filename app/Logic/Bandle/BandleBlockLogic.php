@@ -140,4 +140,38 @@ class BandleBlockLogic
         );
         return view('bandle.block.modals.item_remove', $arr);
     }
+
+    public static function item_remove($id)
+    {
+        $user_id = Auth::id();
+        $block = Block::query()->find($id);
+        $block->hidden = 1;
+        $sort = $block->sort;
+        $bandle_id = $block->bandle_id;
+        if($block->save()) {
+
+            $blocks = Block::query()->select('id')->where('sort', '>', $sort)->where('bandle_id', $bandle_id)
+            ->where('user_id', $user_id)->where('publish', 1)->where('hidden', 0)->get()->toArray();
+
+            foreach($blocks as $item) {
+                $block = Block::query()->find($item['id']);
+                $sort = $block->sort;
+                $block->sort = $sort - 1;
+                $block->save();
+            }
+
+            $block_type_id = Block::query()->find($id)->block_type_id;
+            if($block_type_id == 1) {
+                $name_block_id = Block::query()->find($id)->name_content()->id;
+                $name_block = NameBlock::query()->find($name_block_id);
+                $name_block->hidden = 1;
+                if($name_block->save()) {
+                    return 1;
+                }
+            } else if($block_type_id == 2 || $block_type_id == 3) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 }
