@@ -35,6 +35,10 @@ class LogicBandleController extends Controller
             {
                 return BandleLogic::set_value_text($id, $request->type, $request->value);
             }
+            else if ($func == 'item_remove')
+            {
+                return BandleLogic::item_remove($id);
+            }
         }
 
         return '400 - Bad Request';

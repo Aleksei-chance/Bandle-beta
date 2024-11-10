@@ -159,5 +159,18 @@ function bandle_set_value_text(id, type, value = '')
     });
 }
 
+function bandle_item_remove(id, Func = '') {
+    $.ajax({
+        url: "/logic/bandle",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_remove', id: id, Func: Func}
+    }).done(function(data){
+        $("#modal_g").html(data);
+    }).fail(function(data){
+        location.reload();
+    });
+}
+
 
 

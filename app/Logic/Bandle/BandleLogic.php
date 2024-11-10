@@ -83,4 +83,12 @@ class BandleLogic
         }
         return 0;
     }
+
+    public static function item_remove($id)
+    {
+        $arr = array(
+            'id' => $id
+        );
+        return view('user.bandle.modals.item_remove', $arr);
+    }
 }
