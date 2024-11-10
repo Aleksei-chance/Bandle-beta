@@ -208,4 +208,22 @@ function bandle_block_item_add_modal(id) {
     });
 }
 
+function bandle_block_item_add(id, block_type_id) {
+    $.ajax({
+        url: "/logic/block",
+        method: "post",
+        dataType: "html",
+        data: {_token: TOKEN, func: 'item_add', bandle_id: id, block_type_id: block_type_id}
+    }).done(function(data){
+        if(data > 0)
+        {
+            bandle_block_items_load(id, 1);
+            $('#bandle_block_item_add').modal('hide');
+        }
+        console.log(data);
+    }).fail(function(data){
+        
+    });
+}
+
 

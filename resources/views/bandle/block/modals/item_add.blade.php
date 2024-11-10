@@ -9,7 +9,7 @@
 
 @section('content')
 @foreach ($items as $item)
-<div class="block_add_item_block" onclick="bandle_block_item_add_send({{ $id }}, {{ $item['id'] }})">
+<div class="block_add_item_block" onclick="bandle_block_item_add({{ $id }}, {{ $item['id'] }})">
     <i class="{{ $item["icon"] }}"></i>
     <div class="block_add_item_text">
         <p class="block_add_item_name">{{ $item["name"] }}</p>

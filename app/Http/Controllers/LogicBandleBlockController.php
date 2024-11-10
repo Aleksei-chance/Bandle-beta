@@ -27,6 +27,10 @@ class LogicBandleBlockController extends Controller
             {
                 return BandleBlockLogic::item_add_modal($bandle_id);
             }
+            else if ($func == 'item_add' && $request->has('block_type_id'))
+            {
+                return BandleBlockLogic::item_add($bandle_id, $request->block_type_id);
+            }
         }
 
         
