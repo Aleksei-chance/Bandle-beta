@@ -39,8 +39,9 @@ function Registration_send() {
         url: "/logic/user",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'registration', email: email, password: password, password_confirmation: password_confirmation}
+        data: {_token: TOKEN, func: 'create', email: email, password: password, password_confirmation: password_confirmation}
     }).done(function(data){
+        console.log(data);
         if(data > 0) {
             location.reload();
         } else {
