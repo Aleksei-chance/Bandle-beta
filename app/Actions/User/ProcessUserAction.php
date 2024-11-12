@@ -14,8 +14,8 @@ class ProcessUserAction
         if($func == 'create') {
             return (new CreatorUserService)->create($request);
         }
-        else if ($func == 'auth') {
-            // return $user->auth($request);
+        else if ($func == 'authorise') {
+            return (new CreatorUserService)->authorise($request);
         }
 
         return '400 - Bad Request';
