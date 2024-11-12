@@ -6,7 +6,7 @@ use App\Services\User\CreatorUserService;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
 
-class UserAction
+class ProcessUserAction
 {
     public function execute(Request $request)
     {
