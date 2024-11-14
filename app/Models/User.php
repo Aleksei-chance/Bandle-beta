@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bandle::class, 'user_id')->where('publish', '1')->where('hidden', '0');
     }
+
+    public function bandles_count(): int
+    {
+        return $this->hasMany(Bandle::class, 'user_id')->where('publish', '1')->where('hidden', '0')->count();
+    }
 }

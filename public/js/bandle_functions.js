@@ -10,7 +10,7 @@ function collection_load(id, type_id)
     }).done(function(data)
     {
         $("#content").html(data);
-        bandle_actions(0);
+        collection_actions(0);
     }).fail(function(data)
     {
 
@@ -19,7 +19,7 @@ function collection_load(id, type_id)
 
 }
 
-function bandle_actions(type_view)
+function collection_actions(type_id)
 {
     let check = 0;
 
@@ -29,7 +29,7 @@ function bandle_actions(type_view)
         check = 1;
         Timer = setTimeout(function()
         {
-            if(type_view == 0)
+            if(type_id == 0)
             {
                 bandle_item_renew_modal(id);
             }
@@ -49,13 +49,13 @@ function bandle_actions(type_view)
     });
 }
 
-function bandle_item_add_modal()
+function collection_item_add_modal(id)
 {
     $.ajax({
-        url: "/logic/bandle",
+        url: "/logic/collection",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, Type: 'Bandle', func: 'item_add_modal'}
+        data: {_token: TOKEN, func: 'item_add_modal', id: id}
     }).done(function(data)
     {
         $("#modal").html(data);
@@ -100,20 +100,20 @@ function input_error(data)
     });
 }
 
-function bandle_item_add()
+function collection_item_add(id)
 {
     let title = $('#title').val();
     let description = $('#description').val();
     $.ajax({
-        url: "/logic/bandle",
+        url: "/logic/collection",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_add', title: title, description: description}
+        data: {_token: TOKEN, func: 'item_add', id: id, title: title, description: description}
     }).done(function(data)
     {
         if(data > 0)
         {
-            user_page_load('bandle');
+            collection_load(id, $('#collection_type_id').val());
             $('#bandle_item_add').modal('hide');
         }
         else

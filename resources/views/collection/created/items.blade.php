@@ -7,7 +7,7 @@
         </div>
     </div>
     @endforeach
-    <div class="bandle_block bandle_add_hover" style="cursor: pointer" onclick="bandle_item_add_modal();">
+    <div class="bandle_block bandle_add_hover" style="cursor: pointer" onclick="collection_item_add_modal({{ $id }});">
         <div class="bandle bandle_center">
             <i class="bandle_add"></i>
         </div>

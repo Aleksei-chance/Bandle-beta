@@ -10,5 +10,5 @@
 @endsection
 
 @section('button')
-<button class="modal_main_small" onclick="bandle_item_add()">Create</button>
+<button class="modal_main_small" onclick="collection_item_add({{ $id }})">Create</button>
 @endsection

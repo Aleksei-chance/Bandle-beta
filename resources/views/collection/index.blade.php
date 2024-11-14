@@ -2,6 +2,7 @@
 
 @section('content')
 
+    <input type="hidden" id="collection_type_id" value="{{ $type_id }}">
     <div class="navigation_bar">
         <img src="{{ asset('svg/Logo-title-1.svg') }}">
         <div class="navigation_btns">
