@@ -71,5 +71,4 @@ abstract class CollectionService
         return false;
     }
 
-
 }

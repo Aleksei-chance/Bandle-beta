@@ -19,7 +19,7 @@ Route::get('/collection', [CollectionController::class, 'view'])->middleware(Aut
 
 Route::post('/logic/user', [LogicController::class, 'user']);
 Route::post('/logic/collection', [LogicController::class, 'collection']);
-Route::post('/logic/bandle', [LogicBandleController::class, 'connect']);
+Route::post('/logic/bandle', [LogicController::class, 'bandle']);
 Route::post('/logic/block', [LogicBandleBlockController::class, 'connect']);
 
 

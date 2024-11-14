@@ -5,10 +5,28 @@ namespace App\Services\Bandle;
 use App\Helpers\ResponsesHelper;
 use App\Models\Bandle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 
 class BandleService
 {
+    protected int $id;
+    protected int $user_id;
+
+    protected string $title;
+    protected string|null $description;
+
+    public function __construct($id)
+    {
+        $this->id = $id;
+
+        $bandle = Bandle::query()->find($id);
+        $this->user_id = $bandle->user_id;
+        $this->title = $bandle->title;
+        $this->description = $bandle->description;
+    }
+
     public function create(int $user_id, Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -25,5 +43,25 @@ class BandleService
             return $bandle->id;
         }
         return 0;
+    }
+
+    public static function access($id):bool
+    {
+        $bandle = Bandle::query()->find($id);
+        if($bandle->user_id == Auth::id())
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function item_renew_modal()
+    {
+        $arr = array(
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+        );
+        return view('bandle.modals.item_renew', $arr );
     }
 }
