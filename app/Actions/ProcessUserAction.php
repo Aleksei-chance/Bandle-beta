@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Actions\User;
+namespace App\Actions;
 
 use App\Services\User\CreatorUserService;
-use App\Services\User\UserService;
 use Illuminate\Http\Request;
 
 class ProcessUserAction
@@ -17,7 +16,6 @@ class ProcessUserAction
         else if ($func == 'authorise') {
             return (new CreatorUserService)->authorise($request);
         }
-
         return '400 - Bad Request';
     }
 }

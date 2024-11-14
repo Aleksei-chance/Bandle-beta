@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\User\ProcessUserAction;
+use App\Actions\ProcessCollectionAction;
+use App\Actions\ProcessUserAction;
 use Illuminate\Http\Request;
 
 class LogicController extends Controller
@@ -10,5 +11,9 @@ class LogicController extends Controller
     public function user(Request $request, ProcessUserAction $userAction)
     {
         return $userAction->execute($request);
+    }
+    public function collection(Request $request, ProcessCollectionAction $processCollectionAction)
+    {
+        return $processCollectionAction->execute($request);
     }
 }

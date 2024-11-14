@@ -1,22 +1,22 @@
 var TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-function user_page_load(type)
+function collection_load(id, type_id)
 {
     $.ajax({
-        url: "/logic/user",
+        url: "/logic/collection",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'page_load', type: type}
+        data: {_token: TOKEN, func: 'page_load', id: id,  type_id: type_id}
     }).done(function(data)
     {
         $("#content").html(data);
         bandle_actions(0);
     }).fail(function(data)
     {
-        
+
     });
 
-    
+
 }
 
 function bandle_actions(type_view)
@@ -27,7 +27,7 @@ function bandle_actions(type_view)
     {
         let id = $(e.currentTarget).attr('id').replaceAll('bandle_', '');
         check = 1;
-        Timer = setTimeout(function() 
+        Timer = setTimeout(function()
         {
             if(type_view == 0)
             {
@@ -61,11 +61,11 @@ function bandle_item_add_modal()
         $("#modal").html(data);
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function input_valid(e) 
+function input_valid(e)
 {
     let val = $(e).val();
     let block = $(e).parent().parent();
@@ -84,15 +84,15 @@ function input_valid(e)
     }
 }
 
-function input_error(data) 
+function input_error(data)
 {
     let massages = data.split('|');
-    $.each(massages, function (index, value) 
-    { 
+    $.each(massages, function (index, value)
+    {
         let massage = value.split(':');
         let block = $("#"+massage[0]+'_block');
         block.find("input").addClass('input_error');
-        if(block.find("input").val()) 
+        if(block.find("input").val())
         {
             block.find("i").removeClass('icon_send').addClass('icon_error');
         }
@@ -100,7 +100,7 @@ function input_error(data)
     });
 }
 
-function bandle_item_add() 
+function bandle_item_add()
 {
     let title = $('#title').val();
     let description = $('#description').val();
@@ -111,21 +111,21 @@ function bandle_item_add()
         data: {_token: TOKEN, func: 'item_add', title: title, description: description}
     }).done(function(data)
     {
-        if(data > 0) 
+        if(data > 0)
         {
             user_page_load('bandle');
             $('#bandle_item_add').modal('hide');
-        } 
-        else 
+        }
+        else
         {
             input_error(data);
         }
     }).fail(function(data){
-        
+
     });
 }
 
-function bandle_item_renew_modal(id, Func = '') 
+function bandle_item_renew_modal(id, Func = '')
 {
     $.ajax({
         url: "/logic/bandle",
@@ -137,7 +137,7 @@ function bandle_item_renew_modal(id, Func = '')
         $("#modal").html(data);
     }).fail(function(data)
     {
-        
+
     });
 }
 
@@ -160,11 +160,11 @@ function bandle_set_value_text(id, type, value = '')
         }
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_item_remove_modal(id, Func = '') 
+function bandle_item_remove_modal(id, Func = '')
 {
     $.ajax({
         url: "/logic/bandle",
@@ -180,7 +180,7 @@ function bandle_item_remove_modal(id, Func = '')
     });
 }
 
-function bandle_item_remove(id, Func = '') 
+function bandle_item_remove(id, Func = '')
 {
     $.ajax({
         url: "/logic/bandle",
@@ -189,26 +189,26 @@ function bandle_item_remove(id, Func = '')
         data: {_token: TOKEN, func: 'item_remove', id: id}
     }).done(function(data)
     {
-        if(data > 0) 
+        if(data > 0)
         {
             $('#bandle_item_remove').modal('hide');
             $('#bandle_item_renew').modal('hide');
-            if(Func == "location") 
+            if(Func == "location")
             {
                 location.reload();
-            } else 
+            } else
             {
                 user_page_load('bandle');
             }
-            
+
         }
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_block_item_add_modal(id) 
+function bandle_block_item_add_modal(id)
 {
     $.ajax({
         url: "/logic/block",
@@ -221,11 +221,11 @@ function bandle_block_item_add_modal(id)
         $('#modal').addClass('modal_block_add')
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_block_item_add(id, block_type_id) 
+function bandle_block_item_add(id, block_type_id)
 {
     $.ajax({
         url: "/logic/block",
@@ -242,11 +242,11 @@ function bandle_block_item_add(id, block_type_id)
         console.log(data);
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_block_items_load(id, auth = false) 
+function bandle_block_items_load(id, auth = false)
 {
     $.ajax({
         url: "/logic/block",
@@ -256,17 +256,17 @@ function bandle_block_items_load(id, auth = false)
     }).done(function(data)
     {
         $("#content").html(data);
-        if(auth) 
+        if(auth)
         {
             bandle_block_actions();
         }
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_block_items_content_load() 
+function bandle_block_items_content_load()
 {
     $(document).find('.block').each(function() {
         let id = $(this).attr('id').replace('block_', '');
@@ -274,7 +274,7 @@ function bandle_block_items_content_load()
     });
 }
 
-function bandle_block_item_content_load(id) 
+function bandle_block_item_content_load(id)
 {
     $.ajax({
         url: "/logic/block",
@@ -286,11 +286,11 @@ function bandle_block_item_content_load(id)
         $("#block_"+id+"_content").html(data);
     }).fail(function(data)
     {
-        
+
     });
 }
 
-function bandle_block_actions() 
+function bandle_block_actions()
 {
     let func = "";
     let func_hold = false;
@@ -308,7 +308,7 @@ function bandle_block_actions()
         id_active = $(e.currentTarget).attr('id').replace('block_', '');
         check = 1;
         func_hold = 0;
-        
+
         let func_element = e.target;
         func = $(func_element).attr('action');
         if(func === undefined) {
@@ -356,7 +356,7 @@ function bandle_block_actions()
                         }
 
                         content.css('top', new_poz);
-                        
+
                         let order = block.css('order');
 
                         $.each(positions, function(key, item) {
@@ -375,8 +375,8 @@ function bandle_block_actions()
                         });
 
                         positions = bandle_block_get_positions();
-                        
-                        
+
+
                     }
                 });
             }
@@ -386,13 +386,13 @@ function bandle_block_actions()
 
 
         let pozStart_X = e.pageX;
-        
+
         $(document).bind('touchmove mousemove', function(e) {
             if(e.pageX < pozStart_X || e.pageX > pozStart_X) {
                 if(e.pageX < pozStart_X - 10 || e.pageX > pozStart_X + 10) {
                     moveX = 1;
                 }
-                
+
                 let width = pozStart_X - e.pageX;
                 if(width > 89) {
                     width = 89;
@@ -487,7 +487,7 @@ function bandle_block_item_remove_modal(id) {
     }).done(function(data){
         $("#modal").html(data);
     }).fail(function(data){
-        
+
     });
 }
 
@@ -503,7 +503,7 @@ function bandle_block_item_remove(id, bandle_id) {
             bandle_block_items_load(bandle_id, 1);
         }
     }).fail(function(data){
-        
+
     });
 }
 
@@ -516,7 +516,7 @@ function bandle_block_item_renew_modal(id) {
     }).done(function(data){
         $("#modal").html(data);
     }).fail(function(data){
-        
+
     });
 }
 
@@ -532,7 +532,7 @@ function bandle_block_set_value_text(id, type, value, block_type_id)
             bandle_block_item_content_load(id);
         }
     }).fail(function(data){
-        
+
     });
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LogicUserController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BandleController;
 use App\Http\Controllers\LogicBandleController;
@@ -15,9 +15,10 @@ Route::get('/', function () {
 });
 
 Route::get('/auth', [AuthController::class, 'view'])->middleware(AuthCheck::class);
-Route::get('/user/{type}', [UserController::class, 'view'])->middleware(AuthCheck::class);
+Route::get('/collection', [CollectionController::class, 'view'])->middleware(AuthCheck::class);
 
 Route::post('/logic/user', [LogicController::class, 'user']);
+Route::post('/logic/collection', [LogicController::class, 'collection']);
 Route::post('/logic/bandle', [LogicBandleController::class, 'connect']);
 Route::post('/logic/block', [LogicBandleBlockController::class, 'connect']);
 
