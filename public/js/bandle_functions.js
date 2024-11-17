@@ -451,12 +451,12 @@ function bandle_block_actions()
     }
 }
 
-function bandle_block_item_remove_modal(id) {
+function bandle_block_item_remove_modal(id, block_id) {
     $.ajax({
-        url: "/logic/block",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_remove_modal', id: id}
+        data: {_token: TOKEN, func: 'item_remove_modal', id: id, block_id: block_id}
     }).done(function(data){
         $("#modal").html(data);
     }).fail(function(data){
@@ -493,7 +493,7 @@ function bandle_block_item_renew_modal(id) {
     });
 }
 
-function bandle_block_set_value_text(id, type, value, block_type_id)
+function bandle_block_set_value_text(id, type, value, block_type_id = 0, bandle_id)
 {
     $.ajax({
         url: "/logic/block",
@@ -501,7 +501,13 @@ function bandle_block_set_value_text(id, type, value, block_type_id)
         dataType: "html",
         data: {_token: TOKEN, func: 'set_value_text', id: id, type: type, value: value, block_type_id: block_type_id}
     }).done(function(data){
+        console.log(data);
         if(data > 0){
+            if(type == 'hidden')
+            {
+                $('#bandle_block_item_remove').modal('hide');
+                return bandle_block_items_load(bandle_id, 1);
+            }
             bandle_block_item_content_load(id);
         }
     }).fail(function(data){

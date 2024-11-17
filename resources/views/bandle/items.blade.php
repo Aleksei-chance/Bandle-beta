@@ -6,7 +6,7 @@
 
                 </div>
                 @if ($access)
-                    <div class="block_remove" id="block_remove_{{ $item['id'] }}" action="bandle_block_item_remove_modal({{ $item['id'] }})">
+                    <div class="block_remove" id="block_remove_{{ $item['id'] }}" action="bandle_block_item_remove_modal({{ $id }}, {{ $item['id'] }})">
                         􀈒 Delete
                     </div>
                 @endif

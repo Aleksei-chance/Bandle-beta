@@ -17,6 +17,8 @@ class BlockService
 
     protected string $icon;
 
+    protected int $hidden;
+
     public function __construct($id)
     {
         $this->id = $id;
@@ -58,7 +60,7 @@ class BlockService
         return false;
     }
 
-    public static function create(int $bandle_id, int $block_type_id):int
+    public static function create(int $bandle_id, int $block_type_id)
     {
         $bandle = Bandle::query()->find($bandle_id);
         $count = $bandle->blocks_count($block_type_id);
@@ -67,6 +69,10 @@ class BlockService
         {
             $user_id = $bandle->user_id;
             $max = $bandle->blocks()->max('sort');
+            if($max == null)
+            {
+                $max = 0;
+            }
             $block = Block::query()->create([
                 'bandle_id' => $bandle_id
                 , 'user_id' => $user_id
@@ -79,5 +85,36 @@ class BlockService
             }
         }
         return 0;
+    }
+
+    public function set_value_text($type, $value):bool
+    {
+        $this->$type = $value;
+        return $this->save();
+    }
+
+    protected  function save():bool
+    {
+        $block = Block::query()->find($this->id);
+        $block->hidden = $this->hidden;
+        if($block->save())
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function item_renew_modal():bool|View
+    {
+        $block_type_id = $this->block_type_id;
+        if($block_type_id == 1)
+        {
+            return (new NameBlockService($this->id))->item_renew_modal();
+        }
+        else if($block_type_id == 2)
+        {
+            return (new SocialBlockService($this->id))->item_renew_modal();
+        }
+        return false;
     }
 }

@@ -46,4 +46,28 @@ class NameBlockService extends BlockService
         }
         return 0;
     }
+
+    public function item_renew_modal():View
+    {
+        $arr = array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'pronouns' => $this->pronouns,
+            'article' => $this->article,
+        );
+        return view('bandle.block.modals.name_block_renew', $arr);
+    }
+
+    protected  function save():bool
+    {
+        $content = NameBlock::query()->where('block_id', '=', $this->id)->first();
+        $content->name = $this->name;
+        $content->pronouns = $this->pronouns;
+        $content->article = $this->article;
+        if($content->save())
+        {
+            return true;
+        }
+        return false;
+    }
 }

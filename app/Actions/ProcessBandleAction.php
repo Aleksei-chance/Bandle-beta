@@ -39,6 +39,10 @@ class ProcessBandleAction
             {
                 return BlockService::create($id, $request->block_type_id);
             }
+            else if($func == 'item_remove_modal' && $request->has('block_id'))
+            {
+                return BandleService::item_remove_modal($id, $request->block_id);
+            }
         }
         return '400 - Bad Request';
     }

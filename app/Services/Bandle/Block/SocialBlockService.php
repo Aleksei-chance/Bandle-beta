@@ -29,4 +29,9 @@ class SocialBlockService extends BlockService
 
         return view('bandle.block.social_block', $arr);
     }
+
+    public function item_renew_modal():bool
+    {
+
+    }
 }

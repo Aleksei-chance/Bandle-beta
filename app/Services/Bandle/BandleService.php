@@ -4,7 +4,9 @@ namespace App\Services\Bandle;
 
 use App\Helpers\ResponsesHelper;
 use App\Models\Bandle;
+use App\Models\Block;
 use App\Models\BlockType;
+use App\Services\Bandle\Block\BlockService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -128,7 +130,7 @@ class BandleService
             'id' => $this->id,
             'items' => $this->get_block_types()
         );
-        return view('bandle.block.modals.item_add', $arr);
+        return view('bandle.modals.item_add', $arr);
     }
 
     protected function get_block_types():array
@@ -144,5 +146,14 @@ class BandleService
             }
         }
         return $types;
+    }
+
+    public static function item_remove_modal($id, $block_id):bool|View
+    {
+        if(BlockService::access($block_id))
+        {
+            return view('bandle.modals.item_remove', ['id' => $id, 'block_id' => $block_id]);
+        }
+        return false;
     }
 }
