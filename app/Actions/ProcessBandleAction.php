@@ -22,6 +22,10 @@ class ProcessBandleAction
             {
                 return (new BandleService($id))->item_renew_modal();
             }
+            else if($func == 'set_value_text' && $request->has('type') && $request->has('value'))
+            {
+                return  (new BandleService($id))->set_value_text($request->type, $request->value);
+            }
         }
         return '400 - Bad Request';
     }

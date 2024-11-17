@@ -5,7 +5,7 @@
 <div class="bandle_item">
     <div class="bandle_head">
         <button class="modal_btn_close text_black"
-            onclick="location.href='/user/bandle'" 
+            onclick="location.href='/collection'"
             style="width: 70px;">
             <i class="modal_close"></i>
             Back
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="bandle_item_content" id="content">
-        
+
     </div>
     <div class="modal_header" style="justify-content: center;" id="bandle_action_btn">
         @include('bandle.buttons')

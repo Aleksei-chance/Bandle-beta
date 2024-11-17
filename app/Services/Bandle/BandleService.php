@@ -17,6 +17,8 @@ class BandleService
     protected string $title;
     protected string|null $description;
 
+    protected int $hidden;
+
     public function __construct($id)
     {
         $this->id = $id;
@@ -25,6 +27,7 @@ class BandleService
         $this->user_id = $bandle->user_id;
         $this->title = $bandle->title;
         $this->description = $bandle->description;
+        $this->hidden = $bandle->hidden;
     }
 
     public function create(int $user_id, Request $request)
@@ -59,9 +62,29 @@ class BandleService
     {
         $arr = array(
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'title' => $this->title,
             'description' => $this->description,
         );
         return view('bandle.modals.item_renew', $arr );
+    }
+
+    public function set_value_text(string $type,string $value) :bool
+    {
+        $this->$type = $value;
+        return $this->save();
+    }
+
+    protected function save(): bool
+    {
+        $bandle = Bandle::query()->find($this->id);
+        $bandle->title = $this->title;
+        $bandle->description = $this->description;
+        $bandle->hidden = $this->hidden;
+        if ($bandle->save())
+        {
+            return true;
+        }
+        return false;
     }
 }

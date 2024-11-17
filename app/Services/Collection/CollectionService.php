@@ -71,4 +71,13 @@ abstract class CollectionService
         return false;
     }
 
+    public static function item_remove_modal($id, $bandle_id):bool|View
+    {
+        if(BandleService::access($bandle_id))
+        {
+            return view('collection.created.modals.item_remove', ['id' => $id, 'bandle_id' => $bandle_id]);
+        }
+        return false;
+    }
+
 }

@@ -141,7 +141,7 @@ function bandle_item_renew_modal(id, Func = '')
     });
 }
 
-function bandle_set_value_text(id, type, value = '')
+function bandle_set_value_text(id, type, value, user_id = 0)
 {
     $.ajax({
         url: "/logic/bandle",
@@ -150,13 +150,14 @@ function bandle_set_value_text(id, type, value = '')
         data: {_token: TOKEN, func: 'set_value_text', id: id, type: type, value: value}
     }).done(function(data)
     {
-        if(data > 0)
+        if(data > 0 && user_id > 0)
         {
-            user_page_load('bandle');
-        }
-        else
-        {
-            alert(data);
+            collection_load(user_id, $('#collection_type_id').val());
+            if(type == 'hidden')
+            {
+                $('#bandle_item_remove').modal('hide');
+                $('#bandle_item_renew').modal('hide');
+            }
         }
     }).fail(function(data)
     {
@@ -164,47 +165,19 @@ function bandle_set_value_text(id, type, value = '')
     });
 }
 
-function bandle_item_remove_modal(id, Func = '')
+function bandle_item_remove_modal(id, bandle_id, Func = '')
 {
     $.ajax({
-        url: "/logic/bandle",
+        url: "/logic/collection",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_remove_modal', id: id, Func: Func}
+        data: {_token: TOKEN, func: 'item_remove_modal', id: id, bandle_id: bandle_id, Func: Func}
     }).done(function(data)
     {
         $("#modal_g").html(data);
     }).fail(function(data)
     {
         location.reload();
-    });
-}
-
-function bandle_item_remove(id, Func = '')
-{
-    $.ajax({
-        url: "/logic/bandle",
-        method: "post",
-        dataType: "html",
-        data: {_token: TOKEN, func: 'item_remove', id: id}
-    }).done(function(data)
-    {
-        if(data > 0)
-        {
-            $('#bandle_item_remove').modal('hide');
-            $('#bandle_item_renew').modal('hide');
-            if(Func == "location")
-            {
-                location.reload();
-            } else
-            {
-                user_page_load('bandle');
-            }
-
-        }
-    }).fail(function(data)
-    {
-
     });
 }
 

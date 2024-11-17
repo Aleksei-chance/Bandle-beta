@@ -11,7 +11,7 @@ class ProcessCollectionAction
     public function execute(Request $request)
     {
         $func = $request->func;
-        $id = 0;
+        $id = $bandle_id = 0;
         if($request->has('id'))
         {
             $id = $request->id;
@@ -30,6 +30,10 @@ class ProcessCollectionAction
             else if($func == 'item_add')
             {
                 return (new BandleService())->create($id, $request);
+            }
+            else if($func == 'item_remove_modal' && $request->has('bandle_id'))
+            {
+                return CreatorCollectionService::item_remove_modal($id, $request->bandle_id);
             }
         }
         return '400 - Bad Request';
