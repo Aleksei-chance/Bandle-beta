@@ -2,7 +2,7 @@
     <div class="social_link_content">
         @foreach ($items as $item)
             <button class="social_link_item"
-                @if ($auth)
+                @if ($access)
                     action="window.open('https://{!! $item['link'] !!}')"
                 @else
                     onclick="window.open('https://{!! $item['link'] !!}')"

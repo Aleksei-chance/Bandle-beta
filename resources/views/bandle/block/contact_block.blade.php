@@ -2,11 +2,11 @@
     <div class="contact_content">
         @foreach ($items as $item)
             <button class="contact_item {{ $item['icon'] }}"
-            @if ($item['type'] == 1 && $auth)
+            @if ($item['type'] == 1 && $access)
                 action="location.href='mailto:{{ $item['value'] }}'"
-            @elseif($item['type'] == 2 && $auth)
+            @elseif($item['type'] == 2 && $access)
                 action="location.href='tel:{{ $item['value'] }}'"
-            @elseif($item['type'] == 3 && $auth)
+            @elseif($item['type'] == 3 && $access)
                 action="location.href='{{ $item['value'] }}'"
             @elseif ($item['type'] == 1)
                 onclick="location.href='mailto:{{ $item['value'] }}'"

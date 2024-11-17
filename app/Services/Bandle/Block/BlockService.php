@@ -15,6 +15,8 @@ class BlockService
     protected int $bandle_id;
     protected int $block_type_id;
 
+    protected string $icon;
+
     public function __construct($id)
     {
         $this->id = $id;
@@ -22,9 +24,11 @@ class BlockService
         $block = Block::query()->find($id);
         $this->bandle_id = $block->bandle_id;
         $this->block_type_id = $block->block_type_id;
+
+        $this->icon = BlockType::query()->find($block->block_type_id)->icon;
     }
 
-    public static function access($id)
+    public static function access($id):bool
     {
         if($block = Block::query()->find($id))
         {
@@ -42,6 +46,14 @@ class BlockService
         if($block_type_id == 1)
         {
             return (new NameBlockService($this->id))->load_content();
+        }
+        else if($block_type_id == 2)
+        {
+            return (new SocialBlockService($this->id))->load_content();
+        }
+        else if($block_type_id == 3)
+        {
+            return (new ContactBlockService($this->id))->load_content();
         }
         return false;
     }
