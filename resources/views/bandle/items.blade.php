@@ -5,7 +5,7 @@
                 <div class="block_content" id="block_{{ $item['id'] }}_content">
 
                 </div>
-                @if ($auth)
+                @if ($access)
                     <div class="block_remove" id="block_remove_{{ $item['id'] }}" action="bandle_block_item_remove_modal({{ $item['id'] }})">
                         􀈒 Delete
                     </div>

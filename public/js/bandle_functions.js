@@ -184,10 +184,10 @@ function bandle_item_remove_modal(id, bandle_id, Func = '')
 function bandle_block_item_add_modal(id)
 {
     $.ajax({
-        url: "/logic/block",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_add_modal', bandle_id: id}
+        data: {_token: TOKEN, func: 'item_add_modal', id: id}
     }).done(function(data)
     {
         $("#modal").html(data);
@@ -201,10 +201,10 @@ function bandle_block_item_add_modal(id)
 function bandle_block_item_add(id, block_type_id)
 {
     $.ajax({
-        url: "/logic/block",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'item_add', bandle_id: id, block_type_id: block_type_id}
+        data: {_token: TOKEN, func: 'item_add', id: id, block_type_id: block_type_id}
     }).done(function(data)
     {
         if(data > 0)
@@ -219,17 +219,17 @@ function bandle_block_item_add(id, block_type_id)
     });
 }
 
-function bandle_block_items_load(id, auth = false)
+function bandle_block_items_load(id, access = false)
 {
     $.ajax({
-        url: "/logic/block",
+        url: "/logic/bandle",
         method: "post",
         dataType: "html",
-        data: {_token: TOKEN, func: 'items_load', bandle_id: id}
+        data: {_token: TOKEN, func: 'items_load', id: id}
     }).done(function(data)
     {
         $("#content").html(data);
-        if(auth)
+        if(access)
         {
             bandle_block_actions();
         }

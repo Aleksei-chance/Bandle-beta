@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Services\Bandle\BandleService;
+use App\Services\Bandle\Block\BlockService;
 use Illuminate\Http\Request;
 
 class ProcessBandleAction
@@ -25,6 +26,18 @@ class ProcessBandleAction
             else if($func == 'set_value_text' && $request->has('type') && $request->has('value'))
             {
                 return  (new BandleService($id))->set_value_text($request->type, $request->value);
+            }
+            else if($func == 'items_load')
+            {
+                return (new BandleService($id))->items_load();
+            }
+            else if($func == 'item_add_modal')
+            {
+                return (new BandleService($id))->item_add_modal();
+            }
+            else if($func == 'item_add' && $request->has('block_type_id'))
+            {
+                return BlockService::create($id, $request->block_type_id);
             }
         }
         return '400 - Bad Request';

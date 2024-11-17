@@ -29,7 +29,7 @@ class ProcessCollectionAction
             }
             else if($func == 'item_add')
             {
-                return (new BandleService())->create($id, $request);
+                return BandleService::create($id, $request);
             }
             else if($func == 'item_remove_modal' && $request->has('bandle_id'))
             {

@@ -4,10 +4,12 @@ namespace App\Services\Bandle;
 
 use App\Helpers\ResponsesHelper;
 use App\Models\Bandle;
+use App\Models\BlockType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Self_;
 
 class BandleService
 {
@@ -30,7 +32,7 @@ class BandleService
         $this->hidden = $bandle->hidden;
     }
 
-    public function create(int $user_id, Request $request)
+    public static function create(int $user_id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             "title" => ["required", 'string', 'max:100']
@@ -50,22 +52,19 @@ class BandleService
 
     public static function access($id):bool
     {
-        $bandle = Bandle::query()->find($id);
-        if($bandle->user_id == Auth::id())
+        if($bandle = Bandle::query()->find($id))
         {
-            return true;
+            if($bandle->user_id == Auth::id())
+            {
+                return true;
+            }
         }
         return false;
     }
 
     public function item_renew_modal()
     {
-        $arr = array(
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'title' => $this->title,
-            'description' => $this->description,
-        );
+        $arr = $this->get();
         return view('bandle.modals.item_renew', $arr );
     }
 
@@ -86,5 +85,64 @@ class BandleService
             return true;
         }
         return false;
+    }
+
+    public function get(): array
+    {
+        return array(
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'access' => (Auth::check() && self::access($this->id))
+        );
+    }
+
+    public function items_load():View
+    {
+        $arr = array(
+            'id' => $this->id,
+            'access' => (Auth::check() && self::access($this->id)),
+            'items' => $this->get_items(),
+        );
+        return view('bandle.items', $arr);
+    }
+
+    public function get_items():array
+    {
+        $arr = array();
+        $items = Bandle::query()->find($this->id)->blocks()->get();
+        foreach ($items as $item)
+        {
+            $arr[] = array(
+                'id' => $item->id,
+                'sort' => $item->sort,
+            );
+        }
+        return $arr;
+    }
+
+    public function item_add_modal():View
+    {
+        $arr = array(
+            'id' => $this->id,
+            'items' => $this->get_block_types()
+        );
+        return view('bandle.block.modals.item_add', $arr);
+    }
+
+    protected function get_block_types():array
+    {
+        $types = array();
+        $block_types = BlockType::query()->orderBy('sort', 'asc')->get();
+        foreach($block_types as $item)
+        {
+            $limit = $item->limit;
+            $count = Bandle::query()->find($this->id)->blocks_count($item->id);
+            if($count < $limit || $limit == 0) {
+                $types[] = $item->toArray();
+            }
+        }
+        return $types;
     }
 }

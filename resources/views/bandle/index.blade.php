@@ -12,7 +12,7 @@
         </button>
         <p class="text_black text_title">{{ $title ?? 'Bandle' }}</p>
         <div style="width: 70px;" class="btn_zero">
-            <button class="btn_bandle_edit" onclick="bandle_renew_item({{ $id }}, 'location')"></button>
+            <button class="btn_bandle_edit" onclick=""></button>
         </div>
     </div>
     <div class="bandle_item_content" id="content">
@@ -24,7 +24,7 @@
 </div>
 
 <script>
-    bandle_block_items_load({{ $id }}, {{ $auth }})
+    bandle_block_items_load({{ $id }}, {{ $access }})
 </script>
 
 @endsection
